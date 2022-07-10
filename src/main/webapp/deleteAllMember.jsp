@@ -37,6 +37,6 @@
   out.print(mesg);	  
  %>
  <br>
- <a href="ClassMember.jsp">목록보기</a>
+ <a href="managementMember.jsp">목록보기</a>
 </body>
 </html>

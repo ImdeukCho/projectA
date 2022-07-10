@@ -46,6 +46,8 @@
 	   <td>Certificatephoto</td>
 	   <td>CertificateData</td>
 	   <td>Hobby</td>
+	   <td>cardName</td>
+	   <td>cardNo</td>
 	 </tr>
 <%
    for(ClassDTO dto: list){
@@ -64,6 +66,8 @@
     <td><%= dto.getCertificatephoto()%></td>
     <td><%= dto.getCertificateData()%></td>
     <td><%= dto.getHobby()%></td>
+    <td><%= dto.getCardName()%></td>
+    <td><%= dto.getCardNo()%></td>
     <td><button onclick="delMember('<%=dto.getUserId() %>')" >삭제</button></td>
   </tr>
 <%

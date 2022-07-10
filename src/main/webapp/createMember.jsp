@@ -54,31 +54,35 @@ $(document).ready(function() {
 		else 
 			$("#hobbyAll").prop("checked", true); 
 	});
-});
-var test=userid12;
-function MainGo() {
-	alert('환영합니다. 회원가입 성공하셨습니다');
-	/* 	var alertMsg = "환영합니다. " + userId;
-		alert(alertMsg);	
-	환영합니다 userId님 넣기. */
-	opener.location.href='MainTest.html'; 
-    window.close();
+	// 취소 버튼 처리 -> 이전페이지로 이동
+	$(".cancleBtn").click(function() {
+		history.back();
+	});
 
+});
+/* 회원가입한 ID를 가져와서 수정하기 */
+var test="홍길동"+"님";
+function MainGo() {	
+ 	var alertMsg = "환영합니다. " + test;
+	alert(alertMsg);
+	opener.location.href='MainTest.html';
+    window.close();
 }
+
 </script>
 
 </head>
 <body>
 
 <div class="container">
-<h1>튜더 가입</h1>
+<h1>회원 가입</h1>
 <div>* 항목은 필수입력 사항입니다.</div>
-	<form action="write.jsp" method="post" enctype="multipart/form-data">
+	<form action="addMember.jsp" method="post" enctype="multipart/form-data" id=writeForm>	<!-- enctype: 파일업로드 -->
 		<div class="form-group">					<!-- div태그 : 각각 스타일 지정할수있게 지정 -->
 			<label for="userId">아이디(*)</label>			<!-- label태그 : input과 같은기능이라 생각하면 된다. -->
 			<div class="input-group">
-				<input name="userId" id="userId" required="required" class="form-control" readonly="readonly"
-					placeholder="힌트기능 : 아이디 중복체크를 이용하세요. 팝업을 허용하셔야 합니다.">
+				<input name="userId" id="userId" required="required" class="form-control" readonly="readonly" pattern="[A-Za-z0-9]{3,20}"
+					autocomplete="off" placeholder="힌트기능 : 아이디 중복체크를 이용하세요. 팝업을 허용하셔야 합니다."> <!-- required : 반드시 쓰시오, autocomplete : 자동완성 -->
 				<div class="input-group-btn">
 					<button type="button" id="idCheckBtn" class="btn btn-default">아이디 중복체크</button>
 				</div>
@@ -86,23 +90,24 @@ function MainGo() {
 		</div>
 		<div class="form-group">
 			<label for="userPasswd">비밀번호(*)</label>
-			<input name="userPasswd" type="password" class="form-control" id="userPasswd">
+			<input name="userPasswd" id="userPasswd" type="password" required="required" pattern=".{4,20}" class="form-control" 
+				placeholder="비밀번호를 입력해주세요.">		
 		</div>
 		<div class="form-group">
 			<label for="userPasswd2">비밀번호 확인(*)</label>
-			<input type="password" class="form-control" id="userPasswd2">
+			<input name="userPasswd2" id="userPasswd2" type="password" required="required" pattern=".{4,20}" class="form-control" 
+			placeholder="비밀번호를 재입력해주세요.">
+			<>
 		</div>
 		<div class="form-group">
 			<label for="userName">이름(*)</label>
-			<input name="userName" type="text" class="form-control" id="userName">
+			<input name="userName" id="userName" type="text" required="required" pattern="[가-힣]{2,10}" class="form-control" placeholder="이름을 입력하세요.">
 		</div>
 		<div class="form-group">
 			<label>성별(*)</label>
 			<div class="form-inline">
-				<!-- style - margin : 바깥쪽 여백 -->
 				<div class="form-group" style="margin: 0 10px">
-					<label>
-						<input name="gender" type="radio" class="form-control" id="gender_man" value="남자" checked="checked">
+					<label><input name="gender" type="radio" class="form-control" id="gender_man" value="남자" checked="checked">
 						남자
 					</label>
 				</div>
@@ -116,55 +121,57 @@ function MainGo() {
 		</div>
 		<div class="form-group">
 			<label for="birth">생년월일(*)</label>
-			<input name="birth" type="date" class="form-control" id="birth">
+			<input name="birth" id="birth" type="date" class="form-control" >
 		</div>
 		<div class="form-group">
-			<label>연락처(*)</label>
+			<label>연락처</label>
 			<div class="form-inline">
 				<input name="phone" class="form-control" style="width:60px" type="text" maxlength="3"
-				 pattern="[0-9]{2,3}" title="숫자 2 ~ 3자리를 입력할 수 있습니다.">-
+				 pattern="[0-9]{2,3}" title="숫자 2 ~ 3자리를 입력할 수 있습니다." placeholder="000"> -
 				<input name="phone" class="form-control" style="width:80px" type="text" maxlength="4"
-				 pattern="[0-9]{4}" title="숫자 4자리를 입력할 수 있습니다.">-
+				 pattern="[0-9]{4}" title="숫자 4자리를 입력할 수 있습니다." placeholder="0000"> -
 				<input name="phone" class="form-control" style="width:80px" type="text" maxlength="4"
-				 pattern="[0-9]{4}" title="숫자 4자리를 입력할 수 있습니다.">
+				 pattern="[0-9]{4}" title="숫자 4자리를 입력할 수 있습니다." placeholder="0000">
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="address">주소(*)</label>
-			<input name="address" type="text" class="form-control" id="address">
+			<input name="address" type="text" class="form-control" id="address" placeholder="주소를 입력하세요.">
 		</div>
 		<div class="form-group">
-			<label for="email">이메일(*)</label>
+			<label for="email">이메일</label>
 			<!-- type : email - 모바일의 키패드가 email입력 패드로 바뀐다. 입력한 데이터가 이메일 양식에 맞는지 검사한다. -->
-			<input name="email" class="form-control" type="email" id="email">
+			<input name="email" class="form-control" type="email" id="email" placeholder="이메일을 입력하세요.">
 		</div>
 		<div class="form-group">
-			<label for="profilephoto">프로필 사진(*)</label>
-			<input name="profilephoto" type="file" id="profilephoto" class="form-control">
+			<label for="profilePhoto">프로필 사진</label>
+			<input name="profilePhoto" type="file" id="profilePhoto" class="form-control" accept=".jpg, .png">
 		</div>
 		<div class="form-group">
-			<label for="certificatephoto">자격증 사진(*)</label>
-			<input name="certificatephoto" type="file" id="certificatephoto" class="form-control" accept=".jpg, .png">  <!-- 업로드파일 형식 제한 -->
+			<label for="certificatePhoto">자격증 사진</label>
+			<input name="certificatePhoto" type="file" id="certificatePhoto" class="form-control" accept=".jpg, .png">  <!-- 업로드파일 형식 제한 -->
 		</div>	
 		<div class="form-group">
-			<label for="certificateData">자격증 정보(*)</label>
-			<input name="certificateData" type="text" id="certificateData" class="form-control" accept=".jpg, .png">
+			<label for="certificateData">자격증 정보</label>
+			<input name="certificateData" type="text" id="certificateData" class="form-control"  placeholder="자격증정보를 입력하세요.">
 		</div>
+		<label for="hobby">취미 선택</label>
 		<div class="checkbox-group">
-		<label for="hobby">취미 선택</label><label for="hobbyAll" style="font-size: small;">&emsp;<input type="checkbox" name="hobbyAll" id="hobbyAll"> 전체 선택</label><br>		
-		<label for="hobby1" style="font-size: small;"><input name="hobby" type="checkbox" id="hobby1" value="디자인·영상·개발"> 디자인·영상·개발</label>&emsp;
-		<label for="hobby2" style="font-size: small;"><input name="hobby" type="checkbox" id="hobby2" value="외국어"> 외국어</label>&emsp;&emsp;&emsp;&emsp;&nbsp;
-		<label for="hobby3" style="font-size: small;"><input name="hobby" type="checkbox" id="hobby3" value="재테크·투잡"> 재테크·투잡</label>&emsp;&emsp;&nbsp;
-		<label for="hobby4" style="font-size: small;"><input name="hobby" type="checkbox" id="hobby4" value="댄스·뮤직"> 댄스·뮤직</label>&emsp;<br>
-		<label for="hobby5" style="font-size: small;"><input name="hobby" type="checkbox" id="hobby5" value="피트니스·스포츠"> 피트니스·스포츠</label>&emsp;&nbsp;
-		<label for="hobby6" style="font-size: small;"><input name="hobby" type="checkbox" id="hobby6" value="뷰티·마인드.펫"> 뷰티·마인드.펫</label>&emsp;
-		<label for="hobby7" style="font-size: small;"><input name="hobby" type="checkbox" id="hobby7" value="드로잉·사진·글"> 드로잉·사진·글</label>&emsp;
-		<label for="hobby8" style="font-size: small;"><input name="hobby" type="checkbox" id="hobby8" value="요리·공예·취미"> 요리·공예·취미</label>&emsp;<br>
+			<input type="checkbox" name="hobbyAll" id="hobbyAll"> 전체 선택<br>		
+			<input name="hobby" type="checkbox" id="hobby1" value="디자인·영상·개발"> 디자인·영상·개발&emsp;
+			<input name="hobby" type="checkbox" id="hobby2" value="외국어"> 외국어&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+			<input name="hobby" type="checkbox" id="hobby3" value="재테크·투잡"> 재테크·투잡&emsp;&emsp;&nbsp;
+			<input name="hobby" type="checkbox" id="hobby4" value="댄스·뮤직"> 댄스·뮤직&emsp;<br>
+			<input name="hobby" type="checkbox" id="hobby5" value="피트니스·스포츠"> 피트니스·스포츠&emsp;&nbsp;
+			<input name="hobby" type="checkbox" id="hobby6" value="뷰티·마인드.펫"> 뷰티·마인드.펫&emsp;
+			<input name="hobby" type="checkbox" id="hobby7" value="드로잉·사진·글"> 드로잉·사진·글&emsp;
+			<input name="hobby" type="checkbox" id="hobby8" value="요리·공예·취미"> 요리·공예·취미&emsp;<br>
 		</div><br>
 		
 		<button class="btn btn-default" onclick="MainGo()">가입</button>
 		<button class="btn btn-default" type="reset">새로고침</button>
-		<button class="btn btn-default" type="button" onclick="window.close();" id="close">닫기</button>
+		<button class="btn btn-default cancleBtn" type="button">취소</button>
+		<button class="btn btn-default closeBtn" type="button" onclick="window.close();" id="close">닫기</button>
 	</form>
 </div>
 </body>

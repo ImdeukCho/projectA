@@ -30,6 +30,19 @@ public class ClassService {
       return list;
 	}//end select
 	
+	public int memberAdd(ClassDTO dto) {
+		 SqlSession session = MySqlSessionFactory.getSession();
+		 int n = 0; 
+		 try {
+	      n = dao.memberAdd(session, dto);
+	       session.commit();	  
+//	      }catch(Exception e) {
+//	    	  e.printStackTrace();
+	      }finally {
+			session.close();
+	      }
+	      return n;
+	}
 	
 	public int delete(String prodId) {
 		 SqlSession session = MySqlSessionFactory.getSession();

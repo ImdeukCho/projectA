@@ -1,5 +1,8 @@
 package com.dto;
 
+import java.util.regex.Pattern;
+import java.util.zip.DataFormatException;
+
 public class ClassDTO {
 
 	private String userId;
@@ -14,13 +17,15 @@ public class ClassDTO {
 	private String certificatephoto;
 	private String certificateData;
 	private String hobby;
+	private String cardName;
+	private String cardNo;
 	public ClassDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public ClassDTO(String userId, String userPasswd, String userName, String gender, String birth, String phone,
 			String address, String email, String profilephoto, String certificatephoto, String certificateData,
-			String hobby) {
+			String hobby, String cardName, String cardNo) {
 		super();
 		this.userId = userId;
 		this.userPasswd = userPasswd;
@@ -34,6 +39,8 @@ public class ClassDTO {
 		this.certificatephoto = certificatephoto;
 		this.certificateData = certificateData;
 		this.hobby = hobby;
+		this.cardName = cardName;
+		this.cardNo = cardNo;
 	}
 	public String getUserId() {
 		return userId;
@@ -107,14 +114,27 @@ public class ClassDTO {
 	public void setHobby(String hobby) {
 		this.hobby = hobby;
 	}
+	public String getCardName() {
+		return cardName;
+	}
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
+	}
+	public String getCardNo() {
+		return cardNo;
+	}
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
+	}
 	@Override
 	public String toString() {
 		return "ClassDTO [userId=" + userId + ", userPasswd=" + userPasswd + ", userName=" + userName + ", gender="
 				+ gender + ", birth=" + birth + ", phone=" + phone + ", address=" + address + ", email=" + email
 				+ ", profilephoto=" + profilephoto + ", certificatephoto=" + certificatephoto + ", certificateData="
-				+ certificateData + ", hobby=" + hobby + "]";
+				+ certificateData + ", hobby=" + hobby + ", cardName=" + cardName + ", cardNo=" + cardNo + "]";
 	}
-
+	
+	
 	
 	
 	
